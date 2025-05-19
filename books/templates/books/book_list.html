@@ -1,0 +1,24 @@
+<h1 style="background: #111184; border: orange solid 3px; border-radius: 10px; text-align: center; color: white; font-size: 50px;">Book List</h1>
+<p>Welcome to the book list page. Here you can find a collection of books.</p>
+<p style="color: grey; font-size: 20px;"><u>We have a total of {{ book_count }} books available.</u></p>
+
+<ul>
+  {% for book in page_obj %}
+    <li>{{ book.title }} ({{ book.published_year }}) by {{ book.author }}</li>
+  {% endfor %}
+</ul>
+<div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span class="current">
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
